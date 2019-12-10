@@ -1,0 +1,79 @@
+<div *ngIf="addedToCart" class="alert alert-success alert-dismissible fade show">
+	<strong>Success!</strong> {{addedToCart}}
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<h1 class="text-primary"><u>{{selectedPackage.name}} Details</u></h1>
+
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="form-group d-flex justify-content-around">
+						<h6 class="">Package Id : </h6>
+						<h6 class="btn-space">{{selectedPackage.id}}</h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group d-flex justify-content-around">
+						<h6>Package Name : </h6>
+						<h6 class="btn-space">{{selectedPackage.name}}</h6>
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="form-group d-flex justify-content-around">
+						<h6 >Package Description : </h6>
+						<textarea class="btn-space" disabled="true" cols="30" rows="1"
+							style="resize: auto; background: white; border: none; ">{{selectedPackage.description}}</textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group d-flex justify-content-around">
+						<h6 class="">Package Price: </h6>
+						<h6 class="btn-space">$ {{selectedPackage.price}}</h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<h4>Products List</h4>
+
+						<table class="table table-hover table-bordered">
+							<thead class="thead-light">
+								<tr>
+  							        <th scope="col" class="text-center">#</th>
+									<th class="text-center" scope="col">Product Id</th>
+									<th class="text-center">Product Name</th>
+									<th class="text-center">Product Price</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr *ngFor="let product of selectedPackage.products; index as i">
+									<th scope="row" class="text-center"> {{i +1}}</th>
+									<td class="text-center">{{ product.id }}</td>
+									<td class="text-center">{{ product.name }}</td>
+									<td class="text-center">{{product.usdPrice | currency:"USD":true}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+
+					<button (click)="goBack()" type="submit" class="btn btn-primary btn-space">
+						Back
+					</button>
+
+					<button (click)="addToCart(selectedPackage)" type="submit" class="btn btn-primary btn-space ">
+						Add To Cart
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>

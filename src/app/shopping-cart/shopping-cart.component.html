@@ -1,0 +1,72 @@
+<h1 class="text-primary">Shopping Cart List</h1>
+
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="totalItems == 0" class="alert alert-danger">
+      <strong>Error!</strong> No Packages found in cart. Please add a Package.
+    </div>
+
+    <div *ngIf="totalItems">
+      <div class="row">
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="text-center">#</th>
+              <th class="text-center" scope="col">Package Id</th>
+              <th class="text-center" scope="col">Package Name</th>
+              <th class="text-center" scope="col">Package Price</th>
+              <th class="text-center" colspan="2" scope="col">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let package of packages; index as i">
+              <th scope="row" class="text-center"> {{i +1}}</th>
+              <td class="text-center" >{{ package.id }}</td>
+              <td class="text-center" >{{ package.name }}</td>
+              <td class="text-center" >{{ package.price | currency:"USD":true }}</td>
+              <td class="text-center" ><a [routerLink]="['/packageDetail', package.id]"
+                  class="btn btn-primary btn-space">View Details</a>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+              </td>
+              <td>
+                <div>
+                  <div class="d-flex ">
+                    <h6>Total Items: </h6>
+                    <h6 class="btn-space">{{totalItems | number }}</h6>
+                  </div>
+                </div>
+                <div>
+                <div class="form-group d-flex">
+                  <h6>Total Cost: </h6>
+                  <h6 class="btn-space">{{totalCost | currency:"USD":true }}</h6>
+                </div>
+                <div *ngIf="totalDiscount != 0">
+                  <div class="form-group d-flex">
+                    <h6>10% Discount Applied: </h6>
+                    <h6 class="btn-space">{{totalDiscount | currency:"USD":true }}</h6>
+                  </div>
+                </div>
+                  <div class="form-group d-flex">
+                    <h6>Final Cost: </h6>
+                    <h6 class="btn-space">{{totalCost - totalDiscount | currency:"USD":true}}</h6>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row ">
+        <div class="col-12">
+          <button class="btn btn-primary btn-space float-right">ORDER</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

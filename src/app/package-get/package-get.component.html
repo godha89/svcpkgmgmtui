@@ -1,0 +1,58 @@
+
+<h1 class="text-primary">Package List</h1>
+
+<div class="card">
+  <div class="card-body">
+<div *ngIf="addedToCart" class="alert alert-success alert-dismissible fade show">
+  <strong>Success!</strong> {{addedToCart}}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click) = "close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+</div>
+
+<div *ngIf="packages == null" class="alert alert-danger">
+  <strong>Error!</strong> There are no packages available to add to cart.
+</div>
+<div *ngIf="packages">
+
+<div class="row">
+    <div class="col-12">
+
+      <!-- Filter -->
+      <form>
+  <div class="form-group form-inline">
+      Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+  </div>
+</form>
+
+<table class="table table-hover table-bordered">
+  <thead class="thead-light">
+  <tr>
+      <th scope="col" class="text-center">#</th>
+      <th class="text-center" scope="col">Package Id</th>
+	    <th class="text-center" scope="col">Package Name</th>
+      <th class="text-center" scope="col">Package Price</th>
+      <th colspan="2" class="text-center" scope="col">Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let package of packages$ | async; index as i" >
+          <th scope="row" class="text-center"> {{i +1}}</th>
+          <td class="text-center">{{package.id}}</td>
+          <td class="text-center">{{package.name}}</td>
+		  <td class="text-center">{{package.price | currency:"USD":true}}</td>
+          <td colspan="2" class="text-center"><button class="btn btn-primary btn-space text-center" [routerLink]="['/packageDetail', package.id]"> View Details </button> 
+            <button class="btn btn-primary btn-space text-center float-right" (click)="addToCart(package)">Add To Cart</button> </td>
+      </tr>
+  </tbody>
+</table>
+
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
